@@ -378,7 +378,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;width:100%}
         <table>
           <thead>
           <tr>
-            <th colspan="16" style="padding:6px 8px;background:var(--bg2)">
+            <th colspan="17" style="padding:6px 8px;background:var(--bg2)">
               <div style="display:flex;gap:3px;flex-wrap:wrap;align-items:center">
                 <button onclick="setAlpha('')" id="alpha-all" class="abtn on">الكل</button><button onclick="setAlpha('0-9')" id="alpha-0" class="abtn">0-9</button><button onclick="setAlpha('أ')" id="alpha-أ" class="abtn">أ</button><button onclick="setAlpha('ب')" id="alpha-ب" class="abtn">ب</button><button onclick="setAlpha('ت')" id="alpha-ت" class="abtn">ت</button><button onclick="setAlpha('ث')" id="alpha-ث" class="abtn">ث</button><button onclick="setAlpha('ج')" id="alpha-ج" class="abtn">ج</button><button onclick="setAlpha('ح')" id="alpha-ح" class="abtn">ح</button><button onclick="setAlpha('خ')" id="alpha-خ" class="abtn">خ</button><button onclick="setAlpha('د')" id="alpha-د" class="abtn">د</button><button onclick="setAlpha('ذ')" id="alpha-ذ" class="abtn">ذ</button><button onclick="setAlpha('ر')" id="alpha-ر" class="abtn">ر</button><button onclick="setAlpha('ز')" id="alpha-ز" class="abtn">ز</button><button onclick="setAlpha('س')" id="alpha-س" class="abtn">س</button><button onclick="setAlpha('ش')" id="alpha-ش" class="abtn">ش</button><button onclick="setAlpha('ص')" id="alpha-ص" class="abtn">ص</button><button onclick="setAlpha('ض')" id="alpha-ض" class="abtn">ض</button><button onclick="setAlpha('ط')" id="alpha-ط" class="abtn">ط</button><button onclick="setAlpha('ظ')" id="alpha-ظ" class="abtn">ظ</button><button onclick="setAlpha('ع')" id="alpha-ع" class="abtn">ع</button><button onclick="setAlpha('غ')" id="alpha-غ" class="abtn">غ</button><button onclick="setAlpha('ف')" id="alpha-ف" class="abtn">ف</button><button onclick="setAlpha('ق')" id="alpha-ق" class="abtn">ق</button><button onclick="setAlpha('ك')" id="alpha-ك" class="abtn">ك</button><button onclick="setAlpha('ل')" id="alpha-ل" class="abtn">ل</button><button onclick="setAlpha('م')" id="alpha-م" class="abtn">م</button><button onclick="setAlpha('ن')" id="alpha-ن" class="abtn">ن</button><button onclick="setAlpha('ه')" id="alpha-ه" class="abtn">ه</button><button onclick="setAlpha('و')" id="alpha-و" class="abtn">و</button><button onclick="setAlpha('ي')" id="alpha-ي" class="abtn">ي</button><button onclick="setAlpha('a')" id="alpha-a" class="abtn">a</button><button onclick="setAlpha('b')" id="alpha-b" class="abtn">b</button><button onclick="setAlpha('c')" id="alpha-c" class="abtn">c</button><button onclick="setAlpha('d')" id="alpha-d" class="abtn">d</button><button onclick="setAlpha('e')" id="alpha-e" class="abtn">e</button><button onclick="setAlpha('f')" id="alpha-f" class="abtn">f</button><button onclick="setAlpha('g')" id="alpha-g" class="abtn">g</button><button onclick="setAlpha('h')" id="alpha-h" class="abtn">h</button><button onclick="setAlpha('i')" id="alpha-i" class="abtn">i</button><button onclick="setAlpha('j')" id="alpha-j" class="abtn">j</button><button onclick="setAlpha('k')" id="alpha-k" class="abtn">k</button><button onclick="setAlpha('l')" id="alpha-l" class="abtn">l</button><button onclick="setAlpha('m')" id="alpha-m" class="abtn">m</button><button onclick="setAlpha('n')" id="alpha-n" class="abtn">n</button><button onclick="setAlpha('o')" id="alpha-o" class="abtn">o</button><button onclick="setAlpha('p')" id="alpha-p" class="abtn">p</button><button onclick="setAlpha('q')" id="alpha-q" class="abtn">q</button><button onclick="setAlpha('r')" id="alpha-r" class="abtn">r</button><button onclick="setAlpha('s')" id="alpha-s" class="abtn">s</button><button onclick="setAlpha('t')" id="alpha-t" class="abtn">t</button><button onclick="setAlpha('u')" id="alpha-u" class="abtn">u</button><button onclick="setAlpha('v')" id="alpha-v" class="abtn">v</button><button onclick="setAlpha('w')" id="alpha-w" class="abtn">w</button><button onclick="setAlpha('x')" id="alpha-x" class="abtn">x</button><button onclick="setAlpha('y')" id="alpha-y" class="abtn">y</button><button onclick="setAlpha('z')" id="alpha-z" class="abtn">z</button>
               </div>
@@ -388,9 +388,9 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;width:100%}
             <th><input type="checkbox" id="chk-all" onchange="toggleAll(this)"></th>
             <th>#</th><th>الكود</th><th>المتجر / العميل</th><th>هاتف العميل</th>
             <th>المندوب</th><th>الفرع الحالي</th><th>الفرع المسئول</th><th>أيام التأخير</th><th>الحالة</th>
-            <th>نتيجة التواصل</th><th>آخر تواصل</th><th>محاولات</th><th>ملاحظة</th><th>واتساب</th><th>حفظ</th>
+            <th>نتيجة التواصل</th><th>آخر تواصل</th><th>محاولات</th><th>ملاحظة</th><th>واتساب</th><th>حفظ</th><th>حذف</th>
           </tr></thead>
-          <tbody id="s-tbody"><tr><td colspan="16" style="text-align:center;padding:36px;color:var(--mute)">ارفع ملف الطرود من تبويب "رفع البيانات"</td></tr></tbody>
+          <tbody id="s-tbody"><tr><td colspan="17" style="text-align:center;padding:36px;color:var(--mute)">ارفع ملف الطرود من تبويب "رفع البيانات"</td></tr></tbody>
         </table>
       </div>
       <div style="padding:10px 16px;border-top:1px solid var(--rim);display:flex;align-items:center;gap:8px;flex-wrap:wrap">
@@ -1173,7 +1173,7 @@ function renderShipments(){
   const page=list.slice((sPage-1)*PER,sPage*PER);
   document.getElementById('s-cnt').textContent=total+' طرد';
   const tbody=document.getElementById('s-tbody');
-  if(!page.length){tbody.innerHTML=`<tr><td colspan="16" style="text-align:center;padding:32px;color:var(--mute)">🔍 لا نتائج</td></tr>`;buildPgn(total,totalP);return;}
+  if(!page.length){tbody.innerHTML=`<tr><td colspan="17" style="text-align:center;padding:32px;color:var(--mute)">🔍 لا نتائج</td></tr>`;buildPgn(total,totalP);return;}
   tbody.innerHTML=page.map((s,idx)=>{
     const sid=String(s.id).replace(/"/g,'&quot;');
     const crData=getCR(s.id);
@@ -1209,6 +1209,7 @@ function renderShipments(){
       <td onclick="event.stopPropagation()"><input type="text" value="${note}" placeholder="ملاحظة..." data-sid="${sid}" class="note-inp" style="background:var(--bg4);border:1px solid var(--rim);border-radius:4px;padding:3px 7px;font-size:11px;color:var(--white);font-family:var(--font);width:110px"></td>
       <td onclick="event.stopPropagation()"><button class="btn btn-wa btn-sm" data-a="wa" data-sid="${sid}" style="font-size:11px;padding:4px 9px">💬 واتساب</button></td>
       <td onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" data-a="save" data-sid="${sid}" style="font-size:11px;padding:4px 9px">💾</button></td>
+      <td onclick="event.stopPropagation()"><button class="btn btn-red btn-sm" data-a="del" data-sid="${sid}" style="font-size:11px;padding:4px 9px">🗑️</button></td>
     </tr>`;
   }).join('');
   if(!tbody._del){
@@ -1232,13 +1233,20 @@ function renderShipments(){
           saveCR(sid,crVal,noteVal);
           markCt(sid);
           btn.textContent='✅';setTimeout(()=>btn.textContent='💾',1500);
+        } else if(a==='del'){
+          if(!confirm('هل تريد حذف هذا الطرد؟'))return;
+          deleteShipment(sid);
         } else if(a==='detail') openDetail(sid);
         else if(a==='return') openRetModal(sid);
       } else if(row&&!e.target.closest('input')&&!e.target.closest('textarea')&&!e.target.closest('select')) openDetail(row.dataset.sid);
     });
     tbody.addEventListener('change',e=>{
       const cr=e.target.closest('.cr-sel');
-      if(cr){saveCR(cr.dataset.sid,cr.value,'');}
+      if(cr){
+        const row=cr.closest('.pr');
+        const ni=row?.querySelector('.note-inp');
+        saveCR(cr.dataset.sid,cr.value,ni?ni.value:getCR(cr.dataset.sid).note);
+      }
     });
   }
   buildPgn(total,totalP);
@@ -2148,6 +2156,15 @@ async function loadDbStats(){
     document.getElementById('db-ct').textContent=ct;
   }catch(e){console.warn('stats',e);}
 }
+async function deleteShipment(sid){
+  try{
+    const r=await fetch(`${SB}/rest/v1/shipments?id=eq.${sid}`,{method:'DELETE',headers:{...H,'Prefer':'return=minimal'}});
+    if(!r.ok){const e=await r.text();throw new Error(e);}
+    shipments=shipments.filter(s=>String(s.id)!==String(sid));
+    toast('🗑️ تم حذف الطرد','w');
+    renderShipments();updateKPIs();
+  }catch(e){toast('خطأ في الحذف: '+e.message,'e');}
+}
 async function clearTodayShipments(){
   const today=new Date().toISOString().split('T')[0];
   // Count today's shipments first
@@ -2338,6 +2355,7 @@ function sendToBranchManager(sid){
 // ══════════════════════════════════════════
 function renderStaff(){
   const users=Object.entries(USERS);
+  const crLabels={solved:'✅ تم الحل',contacted:'📞 تم التواصل',no_answer:'📵 لا يرد',pending:'⏳ قيد المتابعة'};
 
   // Count from Supabase contact_results_db
   let totalFollowed=0,totalSolved=0,totalContacted=0,totalNoAnswer=0,totalPending=0,totalNone=0;
@@ -2355,26 +2373,28 @@ function renderStaff(){
   });
 
   // KPIs
-  const kpis=document.getElementById('staff-kpis');
-  kpis.innerHTML=`
+  document.getElementById('staff-kpis').innerHTML=`
     <div style="background:var(--bg4);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--gold);font-family:var(--mono)">${shipments.length}</div><div style="font-size:11px;color:var(--mute)">إجمالي الطرود</div></div>
     <div style="background:var(--bg4);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--grn);font-family:var(--mono)">${totalFollowed}</div><div style="font-size:11px;color:var(--mute)">تمت متابعتها</div></div>
     <div style="background:var(--bg4);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--red);font-family:var(--mono)">${totalNone}</div><div style="font-size:11px;color:var(--mute)">بدون متابعة</div></div>
     <div style="background:var(--bg4);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--pur);font-family:var(--mono)">${shipments.length?Math.round(totalFollowed/shipments.length*100):0}%</div><div style="font-size:11px;color:var(--mute)">نسبة الإنجاز</div></div>
   `;
 
-  // Per-employee stats from Supabase data
+  // Per-employee stats + shipment list
   const empStats={};
-  users.forEach(([uname,u])=>{empStats[u.name]={name:u.name,role:u.role,followed:0,solved:0,contacted:0,no_answer:0,pending:0};});
+  users.forEach(([uname,u])=>{empStats[u.name]={name:u.name,role:u.role,followed:0,solved:0,contacted:0,no_answer:0,pending:0,items:[]};});
   contact_results_db.forEach(r=>{
-    if(!r.result||!r.updated_by)return;
+    if(!r.updated_by)return;
     const name=r.updated_by;
-    if(!empStats[name])empStats[name]={name,role:'employee',followed:0,solved:0,contacted:0,no_answer:0,pending:0};
-    empStats[name].followed++;
-    if(r.result==='solved')empStats[name].solved++;
-    else if(r.result==='contacted')empStats[name].contacted++;
-    else if(r.result==='no_answer')empStats[name].no_answer++;
-    else if(r.result==='pending')empStats[name].pending++;
+    if(!empStats[name])empStats[name]={name,role:'employee',followed:0,solved:0,contacted:0,no_answer:0,pending:0,items:[]};
+    if(r.result){
+      empStats[name].followed++;
+      if(r.result==='solved')empStats[name].solved++;
+      else if(r.result==='contacted')empStats[name].contacted++;
+      else if(r.result==='no_answer')empStats[name].no_answer++;
+      else if(r.result==='pending')empStats[name].pending++;
+    }
+    empStats[name].items.push({code:r.tracking_code||'—',result:r.result||'',note:r.note||'',sid:r.shipment_id});
   });
 
   const rows=Object.values(empStats).sort((a,b)=>b.followed-a.followed);
@@ -2385,6 +2405,11 @@ function renderStaff(){
     tbody.innerHTML=rows.filter(r=>r.followed>0).map(r=>{
       const pct=shipments.length?Math.round(r.followed/shipments.length*100):0;
       const pctColor=pct>70?'var(--grn)':pct>30?'var(--gold)':'var(--red)';
+      const codesHtml=r.items.slice(0,50).map(it=>{
+        const rc=it.result==='solved'?'var(--grn)':it.result==='contacted'?'var(--blu)':it.result==='no_answer'?'var(--red)':it.result==='pending'?'var(--gold)':'var(--mute)';
+        const noteStr=it.note?` — <span style="color:var(--pale)">${it.note}</span>`:'';
+        return`<div style="font-size:10px;padding:2px 0;border-bottom:1px solid var(--rim)"><span class="code-cell" style="font-size:10px">${it.code}</span> <span style="color:${rc}">${crLabels[it.result]||'—'}</span>${noteStr}</div>`;
+      }).join('');
       return`<tr>
         <td><strong>${r.name}</strong><div style="font-size:10px;color:var(--dim)">${r.role==='manager'?'مدير':'موظف'}</div></td>
         <td style="font-family:var(--mono);font-weight:700">${r.followed}</td>
@@ -2393,13 +2418,13 @@ function renderStaff(){
         <td style="color:var(--red);font-weight:700">${r.no_answer}</td>
         <td style="color:var(--gold);font-weight:700">${r.pending}</td>
         <td><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:var(--bg5);border-radius:99px;height:6px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${pctColor};border-radius:99px"></div></div><span style="font-size:11px;font-weight:700;color:${pctColor};font-family:var(--mono)">${pct}%</span></div></td>
-      </tr>`;
+      </tr>
+      <tr><td colspan="7" style="padding:4px 12px;background:var(--bg2)"><details><summary style="cursor:pointer;font-size:11px;color:var(--pale)">📋 عرض الأكواد (${r.items.length})</summary><div style="max-height:200px;overflow-y:auto;margin-top:6px">${codesHtml||'<div style="color:var(--mute);font-size:11px">لا أكواد</div>'}</div></details></td></tr>`;
     }).join('');
   }
 
   // CR summary
-  const summary=document.getElementById('staff-cr-summary');
-  summary.innerHTML=`
+  document.getElementById('staff-cr-summary').innerHTML=`
     <div style="background:var(--grd);border:1px solid var(--grb);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--grn);font-family:var(--mono)">${totalSolved}</div><div style="font-size:11px;color:var(--grn)">✅ تم الحل</div></div>
     <div style="background:var(--bld);border:1px solid var(--blb);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--blu);font-family:var(--mono)">${totalContacted}</div><div style="font-size:11px;color:var(--blu)">📞 تم التواصل</div></div>
     <div style="background:var(--rd);border:1px solid var(--rb);border-radius:var(--r2);padding:14px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--red);font-family:var(--mono)">${totalNoAnswer}</div><div style="font-size:11px;color:var(--red)">📵 لا يرد</div></div>
