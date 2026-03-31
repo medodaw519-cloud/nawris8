@@ -1901,7 +1901,7 @@ async function uploadShipments(rows,forceStatus){
     'delivered':'delivered','returned':'returned','transferred':'transferred'
   };
 
-  const seen=new Set();const data=[];
+  const seen=new Set();const data=[];let skippedNonStore=0;
   for(const [i,r] of rows.entries()){
     const code=String(gf('الكود','كود الطرد','tracking_code','Code','ParcelCode')(r)||('P-'+Date.now()+'-'+i)).trim();
     if(seen.has(code))continue;seen.add(code);
@@ -1909,12 +1909,51 @@ async function uploadShipments(rows,forceStatus){
     let days=0;
     try{days=parseInt(gf('عدد الايام المتأخرة','التأخير (أيام)','التأخير','delay_days','الأيام')(r))||0;}catch{}
 
+    // Calculate delay from "تاريخ التسليم للمندوب" if available
+    const deliveryDateRaw=gf('تاريخ التسليم للمندوب','تاريخ التسليم','تاريخ الاستلام','delivery_date')(r)||'';
+    if(deliveryDateRaw){
+      try{
+        let dDate;
+        if(typeof deliveryDateRaw==='number'){
+          // Excel serial date number
+          dDate=new Date((deliveryDateRaw-25569)*86400*1000);
+        } else {
+          // Try parsing string date
+          const cleaned=String(deliveryDateRaw).trim();
+          dDate=new Date(cleaned);
+          if(isNaN(dDate.getTime())){
+            // Try DD/MM/YYYY or DD-MM-YYYY
+            const parts=cleaned.split(/[\/\-\.]/);
+            if(parts.length===3){
+              const d=parseInt(parts[0]),m=parseInt(parts[1])-1,y=parseInt(parts[2]);
+              dDate=new Date(y<100?y+2000:y,m,d);
+            }
+          }
+        }
+        if(dDate&&!isNaN(dDate.getTime())){
+          const today=new Date();today.setHours(0,0,0,0);dDate.setHours(0,0,0,0);
+          const diffDays=Math.floor((today-dDate)/(1000*60*60*24));
+          if(diffDays>=0) days=diffDays;
+        }
+      }catch(e){console.warn('date parse error',deliveryDateRaw,e);}
+    }
+
     const rawSt=gf('الحالة','status','Status')(r)||'with_driver';
     const driverName=gf('المندوب','اسم المندوب','driver_name','DriverName')(r)||'';
     const driverPhone=normPhone(gf('رقم المندوب','هاتف المندوب','driver_phone')(r)||'');
     const regionName=gf('المنطقة','المدينة','region_name','City')(r)||'';
     const branchName=gf('الفرع الحالى','الفرع','branch_name','Branch')(r)||'';
     const customerPhone=normPhone(gf('المستلم','هاتف العميل','customer_phone','ReceiverPhone')(r)||'')||gf('المستلم','هاتف العميل','customer_phone','ReceiverPhone')(r)||'—';
+
+    // Extract customer name
+    const customerName = gf('المرسل','اسم العميل','customer_name','ClientName','SenderName')(r)||'—';
+
+    // Filter: for "with_driver" uploads, only accept shipments whose customer is a registered store
+    if(forceStatus==='with_driver'){
+      const custLower=(customerName||'').trim().toLowerCase();
+      const isRegistered=custLower&&Object.keys(storeMap).some(k=>k.includes(custLower)||custLower.includes(k));
+      if(!isRegistered){skippedNonStore++;continue;}
+    }
 
     // Resolve driver
     let driver=driverMap[driverName]||driverPhoneMap[driverPhone]||null;
@@ -1933,7 +1972,6 @@ async function uploadShipments(rows,forceStatus){
     }
 
     // Extract fields with exact column names from النورس file
-    const customerName = gf('المرسل','اسم العميل','customer_name','ClientName','SenderName')(r)||'—';
     const receiverPhone = normPhone(gf('المستلم','هاتف المستلم','customer_phone','ReceiverPhone')(r)||'') ||
                           gf('المستلم','هاتف المستلم','customer_phone','ReceiverPhone')(r)||'—';
     const driverNameRaw = gf('المندوب','اسم المندوب','driver_name')(r)||'';
@@ -2027,9 +2065,10 @@ async function uploadShipments(rows,forceStatus){
     const linkedD=data.filter(d=>d.driver_id).length;
     const linkedS=data.filter(d=>d.store_id).length;
     const linkedR=data.filter(d=>d.region_id).length;
-    el.innerHTML=`<span style="color:var(--grn)">✅ تم رفع ${data.length} طرد<br>
-      🚗 مرتبط بمندوب: ${linkedD} | 🏪 مرتبط بمتجر: ${linkedS} | 🗺️ مرتبط بمنطقة: ${linkedR}</span>`;
-    toast(`✅ ${data.length} طرد — متجر: ${linkedS} | مندوب: ${linkedD}`,'s');
+    const skippedMsg=skippedNonStore>0?`<br>⚠️ تم تجاوز ${skippedNonStore} طرد (عميل غير مسجل كمتجر)`:'';
+    el.innerHTML=`<span style="color:var(--grn)">✅ تم رفع ${data.length} طرد (${statusLabel})<br>
+      🚗 مرتبط بمندوب: ${linkedD} | 🏪 مرتبط بمتجر: ${linkedS} | 🗺️ مرتبط بمنطقة: ${linkedR}${skippedMsg}</span>`;
+    toast(`✅ ${data.length} طرد — متجر: ${linkedS} | مندوب: ${linkedD}${skippedNonStore?' | تجاوز: '+skippedNonStore:''}`,'s');
     await loadShipments();loadDbStats();
     setSyncState('ok','متصل');
   }catch(e){
