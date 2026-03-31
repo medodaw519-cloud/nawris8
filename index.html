@@ -1912,7 +1912,7 @@ async function uploadShipments(rows,forceStatus){
     'delivered':'delivered','returned':'returned','transferred':'transferred'
   };
 
-  const seen=new Set();const data=[];let skippedNonStore=0;
+  const seen=new Set();const data=[];let registeredStoreCount=0;
   for(const [i,r] of rows.entries()){
     const code=String(gf('الكود','كود الطرد','tracking_code','Code','ParcelCode')(r)||('P-'+Date.now()+'-'+i)).trim();
     if(seen.has(code))continue;seen.add(code);
@@ -1959,12 +1959,10 @@ async function uploadShipments(rows,forceStatus){
     // Extract customer name
     const customerName = gf('المرسل','اسم العميل','customer_name','ClientName','SenderName')(r)||'—';
 
-    // Filter: for "with_driver" uploads, only accept shipments whose customer is a registered store
-    if(forceStatus==='with_driver'){
-      const custLower=(customerName||'').trim().toLowerCase();
-      const isRegistered=custLower&&Object.keys(storeMap).some(k=>k.includes(custLower)||custLower.includes(k));
-      if(!isRegistered){skippedNonStore++;continue;}
-    }
+    // Check if customer is a registered store
+    const custLower=(customerName||'').trim().toLowerCase();
+    const isRegisteredStore=custLower&&Object.keys(storeMap).some(k=>k.includes(custLower)||custLower.includes(k));
+    if(isRegisteredStore) registeredStoreCount++;
 
     // Resolve driver
     let driver=driverMap[driverName]||driverPhoneMap[driverPhone]||null;
@@ -2076,10 +2074,10 @@ async function uploadShipments(rows,forceStatus){
     const linkedD=data.filter(d=>d.driver_id).length;
     const linkedS=data.filter(d=>d.store_id).length;
     const linkedR=data.filter(d=>d.region_id).length;
-    const skippedMsg=skippedNonStore>0?`<br>⚠️ تم تجاوز ${skippedNonStore} طرد (عميل غير مسجل كمتجر)`:'';
+    const storeMsg=registeredStoreCount>0?`<br>🟢 متجر مسجل: ${registeredStoreCount} | ⚪ غير مسجل: ${data.length-registeredStoreCount}`:'';
     el.innerHTML=`<span style="color:var(--grn)">✅ تم رفع ${data.length} طرد (${statusLabel})<br>
-      🚗 مرتبط بمندوب: ${linkedD} | 🏪 مرتبط بمتجر: ${linkedS} | 🗺️ مرتبط بمنطقة: ${linkedR}${skippedMsg}</span>`;
-    toast(`✅ ${data.length} طرد — متجر: ${linkedS} | مندوب: ${linkedD}${skippedNonStore?' | تجاوز: '+skippedNonStore:''}`,'s');
+      🚗 مرتبط بمندوب: ${linkedD} | 🏪 مرتبط بمتجر: ${linkedS} | 🗺️ مرتبط بمنطقة: ${linkedR}${storeMsg}</span>`;
+    toast(`✅ ${data.length} طرد — متجر: ${linkedS} | مندوب: ${linkedD}`,'s');
     await loadShipments();loadDbStats();
     setSyncState('ok','متصل');
   }catch(e){
